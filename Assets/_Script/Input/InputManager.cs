@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
 
     public static Vector2 inputMove;
     public static Vector2 inputDeltaPointer;
+    public static Action inputJump;
+
     public static Action inputMenu;
     public static Action inputStart;
 
@@ -20,9 +22,11 @@ public class InputManager : MonoBehaviour
         menuControls = controls.Menu;
 
         defaultControls.Move.performed += ctx => inputMove = ctx.ReadValue<Vector2>();
-        defaultControls.CameraLook.performed += ctx => inputDeltaPointer = ctx.ReadValue<Vector2>();
+        defaultControls.Look.performed += ctx => inputDeltaPointer = ctx.ReadValue<Vector2>();
+        defaultControls.Jump.started += ctx => inputJump?.Invoke();
+
         menuControls.Menu.started += ctx => inputMenu?.Invoke();
-        menuControls.StartRun.started += ctx => inputStart?.Invoke();
+        menuControls.Start.started += ctx => inputStart?.Invoke();
     }
 
     private void OnEnable() //restarts controls when needed

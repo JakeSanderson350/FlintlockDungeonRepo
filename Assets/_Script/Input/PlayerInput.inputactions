@@ -19,7 +19,7 @@
                     "type": "PassThrough",
                     "id": "ec8d9a5c-8bd9-4f51-a957-a41e5f18b282",
                     "expectedControlType": "Vector2",
-                    "processors": "NormalizeVector2",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
@@ -171,7 +171,7 @@
                     "id": "ff4f3dce-133f-4405-9140-38913533ab91",
                     "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=0.01666667,y=0.01666667)",
+                    "processors": "ScaleVector2",
                     "groups": "",
                     "action": "Look",
                     "isComposite": false,

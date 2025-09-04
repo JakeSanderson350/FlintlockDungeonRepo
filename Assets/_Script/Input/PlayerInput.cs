@@ -37,11 +37,11 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CameraLook"",
+                    ""name"": ""Look"",
                     ""type"": ""PassThrough"",
                     ""id"": ""ec8d9a5c-8bd9-4f51-a957-a41e5f18b282"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
@@ -193,9 +193,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""id"": ""ff4f3dce-133f-4405-9140-38913533ab91"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=0.01666667,y=0.01666667)"",
+                    ""processors"": ""ScaleVector2"",
                     ""groups"": """",
-                    ""action"": ""CameraLook"",
+                    ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -206,7 +206,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CameraLook"",
+                    ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -235,7 +235,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""StartRun"",
+                    ""name"": ""Start"",
                     ""type"": ""Button"",
                     ""id"": ""e2b344bc-7fd4-42d1-a0ec-fb0182ddd608"",
                     ""expectedControlType"": """",
@@ -296,7 +296,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""StartRun"",
+                    ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -307,7 +307,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""StartRun"",
+                    ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -319,13 +319,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Default
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
         m_Default_Move = m_Default.FindAction("Move", throwIfNotFound: true);
-        m_Default_CameraLook = m_Default.FindAction("CameraLook", throwIfNotFound: true);
+        m_Default_Look = m_Default.FindAction("Look", throwIfNotFound: true);
         m_Default_Jump = m_Default.FindAction("Jump", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Mouse = m_Menu.FindAction("Mouse", throwIfNotFound: true);
         m_Menu_Menu = m_Menu.FindAction("Menu", throwIfNotFound: true);
-        m_Menu_StartRun = m_Menu.FindAction("StartRun", throwIfNotFound: true);
+        m_Menu_Start = m_Menu.FindAction("Start", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -394,14 +394,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Default;
     private List<IDefaultActions> m_DefaultActionsCallbackInterfaces = new List<IDefaultActions>();
     private readonly InputAction m_Default_Move;
-    private readonly InputAction m_Default_CameraLook;
+    private readonly InputAction m_Default_Look;
     private readonly InputAction m_Default_Jump;
     public struct DefaultActions
     {
         private @PlayerInput m_Wrapper;
         public DefaultActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Default_Move;
-        public InputAction @CameraLook => m_Wrapper.m_Default_CameraLook;
+        public InputAction @Look => m_Wrapper.m_Default_Look;
         public InputAction @Jump => m_Wrapper.m_Default_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
@@ -415,9 +415,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @CameraLook.started += instance.OnCameraLook;
-            @CameraLook.performed += instance.OnCameraLook;
-            @CameraLook.canceled += instance.OnCameraLook;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -428,9 +428,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @CameraLook.started -= instance.OnCameraLook;
-            @CameraLook.performed -= instance.OnCameraLook;
-            @CameraLook.canceled -= instance.OnCameraLook;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -457,14 +457,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
     private readonly InputAction m_Menu_Mouse;
     private readonly InputAction m_Menu_Menu;
-    private readonly InputAction m_Menu_StartRun;
+    private readonly InputAction m_Menu_Start;
     public struct MenuActions
     {
         private @PlayerInput m_Wrapper;
         public MenuActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Mouse => m_Wrapper.m_Menu_Mouse;
         public InputAction @Menu => m_Wrapper.m_Menu_Menu;
-        public InputAction @StartRun => m_Wrapper.m_Menu_StartRun;
+        public InputAction @Start => m_Wrapper.m_Menu_Start;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -480,9 +480,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Menu.started += instance.OnMenu;
             @Menu.performed += instance.OnMenu;
             @Menu.canceled += instance.OnMenu;
-            @StartRun.started += instance.OnStartRun;
-            @StartRun.performed += instance.OnStartRun;
-            @StartRun.canceled += instance.OnStartRun;
+            @Start.started += instance.OnStart;
+            @Start.performed += instance.OnStart;
+            @Start.canceled += instance.OnStart;
         }
 
         private void UnregisterCallbacks(IMenuActions instance)
@@ -493,9 +493,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Menu.started -= instance.OnMenu;
             @Menu.performed -= instance.OnMenu;
             @Menu.canceled -= instance.OnMenu;
-            @StartRun.started -= instance.OnStartRun;
-            @StartRun.performed -= instance.OnStartRun;
-            @StartRun.canceled -= instance.OnStartRun;
+            @Start.started -= instance.OnStart;
+            @Start.performed -= instance.OnStart;
+            @Start.canceled -= instance.OnStart;
         }
 
         public void RemoveCallbacks(IMenuActions instance)
@@ -516,13 +516,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IDefaultActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnCameraLook(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
         void OnMouse(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
-        void OnStartRun(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
     }
 }

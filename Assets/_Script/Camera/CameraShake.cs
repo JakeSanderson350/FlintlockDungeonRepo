@@ -1,21 +1,8 @@
 using UnityEngine;
 
-public class CameraEffects : MonoBehaviour
+public class CameraShake : MonoBehaviour
 {
     private Camera cam;
-
-    [Header("Presets")]
-    [SerializeField] Rigidbody linkedObject;
-    [SerializeField] float effectsMinSpeed = 30.0f;
-    [SerializeField] float effectsMaxSpeed = 150.0f;
-
-    [Tooltip("FOV constraints")]
-    public float minFOV = 70.0f;
-    public float maxFOV = 90.0f;
-
-    [Tooltip("Shake constraints")]
-    public float minShake = 0.0f;
-    public float maxShake = 1.0f;
 
     [Header("Perlin System")]
     [SerializeField] float trauma;
@@ -44,22 +31,9 @@ public class CameraEffects : MonoBehaviour
 
     void Update()
     {
-        FindMinTrauma();
-        ZoomCam();
         ShakeCam();
     }
     
-    private void FindMinTrauma()
-    {
-        float speedShake = Mathf.Lerp(minShake, maxShake, Mathf.InverseLerp(effectsMinSpeed, effectsMaxSpeed, linkedObject.velocity.magnitude));
-        trauma = speedShake > trauma ? speedShake : trauma;
-    }
-
-    private void ZoomCam()
-    {
-        cam.fieldOfView = Mathf.Lerp(minFOV, maxFOV, Mathf.InverseLerp(effectsMinSpeed, effectsMaxSpeed, linkedObject.velocity.magnitude));
-    }
-
     private void ShakeCam()
     {
         if (trauma > 0)

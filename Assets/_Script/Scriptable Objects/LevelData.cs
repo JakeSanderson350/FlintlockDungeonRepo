@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[CreateAssetMenu(fileName = "new level", menuName = "Level Data")]
+[CreateAssetMenu(fileName = "new level", menuName = "Level/Level Data")]
 public class LevelData : ScriptableObject
 {
     [Header("Header")]
