@@ -7,6 +7,12 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.kyrylokuzyk.primetween": {
+      "version": "file:../Assets/Plugins/PrimeTween/internal/com.kyrylokuzyk.primetween.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
     "com.starasgames.tmpro-dynamic-data-cleaner": {
       "version": "https://github.com/STARasGAMES/tmpro-dynamic-data-cleaner.git#upm",
       "depth": 0,
