@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e480cfec2876ca48be48ccead319515, type: 3}
   m_Name: Level_01_Intro
   m_EditorClassIdentifier: 
-  sceneName: MainMenu
+  sceneName: Level_01_Intro
   name: 
   description: 
   nextLevel: {fileID: 11400000, guid: 2b20ee5de86b08444848de646fbf7ead, type: 2}

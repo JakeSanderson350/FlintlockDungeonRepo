@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e480cfec2876ca48be48ccead319515, type: 3}
-  m_Name: Level_01
+  m_Script: {fileID: 11500000, guid: 5356d8ca58120464d89b51fada2827bc, type: 3}
+  m_Name: Level_01 Text
   m_EditorClassIdentifier: 
-  sceneName: Level_01
-  name: 
-  description: 
-  nextLevel: {fileID: 11400000, guid: 6b9e5a5f19377564997e2c342566df98, type: 2}
-  playOnSceneLoad: 0
-  soundtrack: {fileID: 0}
+  text:
+  - text: "A dungeon most foul...\t\n"
+    scrollSpeed: 0.05
+  - text: Delve in and plunder it's artifacts...
+    scrollSpeed: 0.05
+  - text: If you dare...
+    scrollSpeed: 0.1
