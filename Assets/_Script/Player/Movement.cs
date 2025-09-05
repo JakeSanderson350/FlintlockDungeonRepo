@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     Vector3 horizontalVelocity = Vector3.zero;
     Vector3 verticalVelocity = Vector3.zero;
     Vector3 wallNormal = Vector3.zero;
+    Vector3 prevWallNormal = Vector3.zero;
     bool isGrounded;
     bool wasGrounded;
     bool isJumpOnCooldown;
@@ -117,6 +118,7 @@ public class Movement : MonoBehaviour
     {
         StartCoroutine(WallJumpCooldown());
 
+        prevWallNormal = wallNormal;
         canWallJump = false;
         isOnWall = false;
 
@@ -208,6 +210,8 @@ public class Movement : MonoBehaviour
 
         if(isOnWall)
         {
+            if (prevWallNormal != wallNormal)
+                isWallJumpOnCooldown = false;
             canWallJump = true;
         }
         else
