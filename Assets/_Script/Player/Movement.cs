@@ -16,6 +16,9 @@ public class Movement : MonoBehaviour
     bool isGrounded;
     bool wasGrounded;
     bool isJumpOnCooldown;
+    bool isWallJumpOnCooldown;
+    bool isOnWall;
+    bool canWallJump;
     float airTime;
     public float GetAirTime() => airTime;
     public bool GetIsGrounded() => isGrounded;
@@ -47,6 +50,7 @@ public class Movement : MonoBehaviour
     {
         //check Groudning. Do this first before airtime gets cutdown
         CheckGrounded();
+        CheckOnWall();
 
         if (isGrounded)
         {
@@ -73,12 +77,20 @@ public class Movement : MonoBehaviour
 
     void Jump()
     {
+        if (!isWallJumpOnCooldown && canWallJump)
+        {
+            WallJump();
+        }
+
         if (airTime > profile.coyoteTime || isJumpOnCooldown)
             return;
 
-        StartCoroutine(JumpCooldown());
-        isGrounded = false;
-        forces.AddForce(profile.jumpForce);
+        
+        else
+        {
+            GroundedJump();
+        }
+
     }
 
     IEnumerator JumpCooldown()
@@ -86,6 +98,33 @@ public class Movement : MonoBehaviour
         isJumpOnCooldown = true;
         yield return new WaitForSeconds(profile.jumpCooldown);
         isJumpOnCooldown = false;
+    }
+
+    IEnumerator WallJumpCooldown()
+    {
+        isWallJumpOnCooldown = true;
+        yield return new WaitForSeconds(profile.wallJumpCooldown);
+        isWallJumpOnCooldown = false;
+    }
+
+    private void GroundedJump()
+    {
+        StartCoroutine(JumpCooldown());
+
+        isGrounded = false;
+        forces.AddForce(profile.jumpForce);
+    }
+
+    private void WallJump()
+    {
+        StartCoroutine(WallJumpCooldown());
+
+        canWallJump = false;
+        isOnWall = false;
+
+        //Need to calc bounce direction somehow
+        forces.AddForce(profile.jumpForce);
+        Debug.Log("Wall Jump");
     }
 
     void AirbornTrigger()
@@ -136,5 +175,27 @@ public class Movement : MonoBehaviour
             GroundedUpdate();
         else
             AirbornUpdate();
+    }
+
+    private void CheckOnWall()
+    {
+        if (isGrounded)
+        {
+            isOnWall = false;
+            canWallJump = false;
+            return;
+        }
+
+        isOnWall = Physics.CheckSphere(transform.position, profile.radius + 0.25f, profile.wallLayer);
+
+        if(isOnWall)
+        {
+            //Debug.Log("On wall");
+            canWallJump = true;
+        }
+        else
+        {
+            canWallJump = false;
+        }
     }
 }
