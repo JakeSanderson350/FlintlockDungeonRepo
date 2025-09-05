@@ -20,4 +20,5 @@ public class PlayerStats : ScriptableObject
     public float coyoteTime = 0.2f;
     public float jumpCooldown = 0.25f;
     public float wallJumpCooldown = 0.20f;
+    public float wallJumpForce = 10.0f;
 }

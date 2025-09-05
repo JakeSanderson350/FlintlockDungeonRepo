@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906430fe48e2f334b913f357d9461bc3, type: 3}
   m_Name: Flintlock Player Stats
   m_EditorClassIdentifier: 
-  speed: 15
-  airSpeed: 2
-  airDrag: 15
+  speed: 20
+  airSpeed: 4
+  airDrag: 5
   terminalGravity: 30
   jumpForce:
     force: {x: 0, y: 20, z: 0}
@@ -31,3 +31,4 @@ MonoBehaviour:
   coyoteTime: 0.2
   jumpCooldown: 0.25
   wallJumpCooldown: 0.5
+  wallJumpForce: 20
