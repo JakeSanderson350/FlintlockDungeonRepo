@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
     bool wasGrounded;
     bool isJumpOnCooldown;
     bool isWallJumpOnCooldown;
-    public bool isOnWall;
+    bool isOnWall;
     bool canWallJump; //probably redundant but may have future use
     float airTime;
     RaycastHit hit;
@@ -127,7 +127,7 @@ public class Movement : MonoBehaviour
         Forces.Force wallJumpForce = new Forces.Force(bounceVec, profile.jumpForce.drag, profile.jumpForce.time);
 
         forces.AddForce(wallJumpForce);
-        Debug.Log("Wall Jump");
+        horizontalVelocity = wallNormal * profile.wallJumpForce;
     }
 
     void AirbornTrigger()
