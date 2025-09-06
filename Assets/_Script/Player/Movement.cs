@@ -15,10 +15,12 @@ public class Movement : MonoBehaviour
     Vector3 verticalVelocity = Vector3.zero;
     bool isGrounded;
     bool wasGrounded;
+    bool isSliding;
     float airTime;
 
     public float GetAirTime() => airTime;
     public bool GetIsGrounded() => isGrounded;
+    public void SetIsSliding(bool _isSliding) => isSliding = _isSliding;
 
     private void Start()
     {
@@ -38,7 +40,11 @@ public class Movement : MonoBehaviour
         //check Groudning. Do this first before airtime gets cutdown
         CheckGrounded();
 
-        if (isGrounded)
+        if (isSliding)
+        {
+            horizontalVelocity = Vector3.zero;
+        }
+        else if (isGrounded)
         {
             horizontalVelocity = Vector3.zero;
             horizontalVelocity += transform.right * InputManager.inputMove.x;

@@ -90,7 +90,6 @@ public class Jump : MonoBehaviour
     private void WallJump()
     {
         StartCoroutine(WallJumpCooldown());
-        Debug.Log("JumpJump");
         prevWallNormal = wallNormal;
         canWallJump = false;
         isOnWall = false;
