@@ -6,7 +6,7 @@ using UnityEngine;
 public class Slide : MonoBehaviour
 {
     Forces forces;
-    Movement movement;
+    CharacterMovement movement;
 
     [SerializeField] PlayerStats profile;
 
@@ -20,7 +20,7 @@ public class Slide : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        movement = GetComponent<Movement>();
+        movement = GetComponent<CharacterMovement>();
         forces = GetComponent<Forces>();
         startScale = transform.localScale.y;
     }

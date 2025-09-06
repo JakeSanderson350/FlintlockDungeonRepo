@@ -82,7 +82,6 @@ public class Jump : MonoBehaviour
     private void GroundedJump()
     {
         StartCoroutine(JumpCooldown());
-        Debug.Log("Hey");
         isGrounded = false;
         forces.AddForce(profile.jumpForce);
     }
