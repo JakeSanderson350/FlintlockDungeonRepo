@@ -31,8 +31,9 @@ MonoBehaviour:
   coyoteTime: 0.2
   jumpCooldown: 0.25
   wallJumpCooldown: 0.5
-  wallJumpForce: 20
-  slideSpeed: 35
-  slideDuration: 1.5
+  wallJumpForce: 15
+  crouchSpeed: 10
+  slideSpeed: 25
+  slideDuration: 1
   slideScale: 0.5
   slideCooldown: 0.25
