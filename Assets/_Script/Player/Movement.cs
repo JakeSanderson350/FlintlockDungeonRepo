@@ -13,14 +13,16 @@ public class Movement : MonoBehaviour
 
     Vector3 horizontalVelocity = Vector3.zero;
     Vector3 verticalVelocity = Vector3.zero;
-    bool isGrounded;
+    public bool isGrounded;
     bool wasGrounded;
+    bool isCrouching;
     bool isSliding;
     float airTime;
 
     public float GetAirTime() => airTime;
     public bool GetIsGrounded() => isGrounded;
     public void SetIsSliding(bool _isSliding) => isSliding = _isSliding;
+    public void SetIsCrouching(bool _isCrouching) => isCrouching = _isCrouching;
 
     private void Start()
     {
@@ -40,7 +42,7 @@ public class Movement : MonoBehaviour
         //check Groudning. Do this first before airtime gets cutdown
         CheckGrounded();
 
-        if (isSliding)
+        if (isSliding && isGrounded)
         {
             horizontalVelocity = Vector3.zero;
         }
@@ -49,7 +51,7 @@ public class Movement : MonoBehaviour
             horizontalVelocity = Vector3.zero;
             horizontalVelocity += transform.right * InputManager.inputMove.x;
             horizontalVelocity += transform.forward * InputManager.inputMove.y;
-            horizontalVelocity *= profile.speed;
+            horizontalVelocity *= isCrouching ? profile.crouchSpeed : profile.speed;
         }
         else
         {
@@ -94,7 +96,7 @@ public class Movement : MonoBehaviour
     void CheckGrounded()
     {
         //SET GROUNDED STATE HERE
-        if(airTime > profile.jumpCooldown)
+        //if(airTime > profile.jumpCooldown)
             isGrounded = Physics.CheckSphere(transform.position + profile.offset, profile.radius, profile.groundingLayers);
 
         if(!isGrounded && wasGrounded)

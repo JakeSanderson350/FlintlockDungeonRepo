@@ -10,9 +10,10 @@ public class Slide : MonoBehaviour
 
     [SerializeField] PlayerStats profile;
 
+    Vector2 moveInput = Vector2.zero;
     Vector3 horizontalVelocity = Vector3.zero;
-    bool isSliding = false;
-    bool isSlideOnCooldown = false;
+    bool isSliding;
+    bool isSlideOnCooldown;
     bool slideDurationOver;
     float startScale;
 
@@ -41,6 +42,8 @@ public class Slide : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        moveInput = InputManager.inputMove;
+
         if(slideDurationOver)
         {
             StopSlide();
@@ -54,13 +57,16 @@ public class Slide : MonoBehaviour
         }
         else
         {
+            
             forces.AddForceConstant(Vector3.zero);
         }
     }
 
     private void CrouchPressed()
     {
-        if (!isSliding && !isSlideOnCooldown)
+        CrouchPlayerDown();
+
+        if (moveInput != Vector2.zero && !isSliding && !isSlideOnCooldown)
         {
             StartSlide();
         }
@@ -68,6 +74,8 @@ public class Slide : MonoBehaviour
 
     private void CrouchUp()
     {
+        CrouchPlayerUp();
+
         if (isSliding)
         {
             StopSlide();
@@ -96,18 +104,27 @@ public class Slide : MonoBehaviour
         yield return new WaitForSeconds(profile.slideDuration);
         isSlideOnCooldown = false;
     }
+    private void CrouchPlayerDown()
+    {
+        transform.localScale = new Vector3(transform.localScale.x, profile.slideScale, transform.localScale.z);
+        movement.SetIsCrouching(true);
+    }
+
+    private void CrouchPlayerUp()
+    {
+        transform.localScale = new Vector3(transform.localScale.x, startScale, transform.localScale.z);
+        movement.SetIsCrouching(false);
+    }
 
     private void StartSlide()
     {
-        Debug.Log("Sldie");
         StartCoroutine(SlideDuration());
         isSliding = true;
         movement.SetIsSliding(isSliding);
-        transform.localScale = new Vector3(transform.localScale.x, profile.slideScale, transform.localScale.z);
 
         horizontalVelocity = Vector3.zero;
-        horizontalVelocity += transform.right * InputManager.inputMove.x;
-        horizontalVelocity += transform.forward * InputManager.inputMove.y;
+        horizontalVelocity += transform.right * moveInput.x;
+        horizontalVelocity += transform.forward * moveInput.y;
         horizontalVelocity *= profile.slideSpeed;
     }
 
@@ -116,7 +133,6 @@ public class Slide : MonoBehaviour
         StartCoroutine(SlideCooldown());
         isSliding = false;
         movement.SetIsSliding(isSliding);
-        transform.localScale = new Vector3(transform.localScale.x, startScale, transform.localScale.z);
 
         horizontalVelocity = Vector3.zero;
     }
