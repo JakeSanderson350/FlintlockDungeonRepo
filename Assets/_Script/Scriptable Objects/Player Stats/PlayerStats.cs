@@ -21,4 +21,11 @@ public class PlayerStats : ScriptableObject
     public float jumpCooldown = 0.25f;
     public float wallJumpCooldown = 0.20f;
     public float wallJumpForce = 10.0f;
+
+    [Header("Sliding")]
+    public float crouchSpeed = 10.0f;
+    public float slideSpeed = 35.0f;
+    public float slideDuration = 2.0f;
+    public float slideScale = 0.5f;
+    public float slideCooldown = 0.75f;
 }

@@ -1,12 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Jump : MonoBehaviour
 {
     //[Header("Components")]
-    CharacterController characterController;
     Forces forces;
 
     [SerializeField] PlayerStats profile;
@@ -26,60 +24,35 @@ public class Movement : MonoBehaviour
 
     public float GetAirTime() => airTime;
     public bool GetIsGrounded() => isGrounded;
-
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-        characterController = GetComponent<CharacterController>();
         forces = GetComponent<Forces>();
     }
 
     private void OnEnable()
     {
-        InputManager.inputJump += Jump;
+        InputManager.inputJump += JumpPressed;
     }
 
     private void OnDisable()
     {
-        InputManager.inputJump -= Jump;
+        InputManager.inputJump -= JumpPressed;
     }
 
-    private void OnDrawGizmos()
+    // Update is called once per frame
+    void Update()
     {
-        if(profile == null) return;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position + profile.offset, profile.radius);
-    }
-
-    private void Update()
-    {
-        //check Groudning. Do this first before airtime gets cutdown
         CheckGrounded();
         CheckOnWall();
 
-        if (isGrounded)
-        {
-            horizontalVelocity = Vector3.zero;
-            horizontalVelocity += transform.right * InputManager.inputMove.x;
-            horizontalVelocity += transform.forward * InputManager.inputMove.y;
-            horizontalVelocity *= profile.speed;
-        }
-        else
-        {
-            Vector3 airVelocity = horizontalVelocity - (horizontalVelocity * profile.airDrag * Time.deltaTime);
-            airVelocity += transform.right * InputManager.inputMove.x * profile.airSpeed;
-            airVelocity += transform.forward * InputManager.inputMove.y * profile.airSpeed;
-            horizontalVelocity = Vector3.ClampMagnitude(airVelocity, profile.speed);
-        }
-
-        verticalVelocity = characterController.velocity.y > -0.001f ? Physics.gravity : Vector3.ClampMagnitude(verticalVelocity + Physics.gravity * Time.deltaTime, profile.terminalGravity);
-
-        //move
-        //characterController.Move(horizontalVelocity * Time.deltaTime);
         forces.AddForceConstant(horizontalVelocity);
         forces.AddForceConstant(verticalVelocity);
+        horizontalVelocity = Vector3.zero;
+        verticalVelocity = Vector3.zero;
     }
 
-    void Jump()
+    void JumpPressed()
     {
         if (!isWallJumpOnCooldown && canWallJump)
         {
@@ -88,7 +61,7 @@ public class Movement : MonoBehaviour
 
         if (airTime > profile.coyoteTime || isJumpOnCooldown)
             return;
-        
+
         GroundedJump();
     }
 
@@ -109,7 +82,6 @@ public class Movement : MonoBehaviour
     private void GroundedJump()
     {
         StartCoroutine(JumpCooldown());
-
         isGrounded = false;
         forces.AddForce(profile.jumpForce);
     }
@@ -117,7 +89,6 @@ public class Movement : MonoBehaviour
     private void WallJump()
     {
         StartCoroutine(WallJumpCooldown());
-
         prevWallNormal = wallNormal;
         canWallJump = false;
         isOnWall = false;
@@ -157,10 +128,10 @@ public class Movement : MonoBehaviour
     void CheckGrounded()
     {
         //SET GROUNDED STATE HERE
-        if(airTime > profile.jumpCooldown)
+        if (airTime > profile.jumpCooldown)
             isGrounded = Physics.CheckSphere(transform.position + profile.offset, profile.radius, profile.groundingLayers);
 
-        if(!isGrounded && wasGrounded)
+        if (!isGrounded && wasGrounded)
         {
             AirbornTrigger();
             wasGrounded = false;
@@ -190,7 +161,7 @@ public class Movement : MonoBehaviour
         }
 
         // check four directions rather than sphere cast to get wall normal
-        Vector3[] wallCheckDirections = 
+        Vector3[] wallCheckDirections =
         {
             transform.right,
             -transform.right,
@@ -198,7 +169,7 @@ public class Movement : MonoBehaviour
             -transform.forward
         };
 
-        foreach(Vector3 direction in wallCheckDirections)
+        foreach (Vector3 direction in wallCheckDirections)
         {
             if (Physics.Raycast(transform.position, direction, out hit, profile.radius + 0.25f, profile.wallLayer))
             {
@@ -208,7 +179,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if(isOnWall)
+        if (isOnWall)
         {
             if (prevWallNormal != wallNormal)
                 isWallJumpOnCooldown = false;
