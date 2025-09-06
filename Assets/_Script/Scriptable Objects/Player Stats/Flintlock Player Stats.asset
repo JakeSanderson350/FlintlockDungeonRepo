@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906430fe48e2f334b913f357d9461bc3, type: 3}
   m_Name: Flintlock Player Stats
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 10
   airSpeed: 4
   airDrag: 5
   terminalGravity: 30
