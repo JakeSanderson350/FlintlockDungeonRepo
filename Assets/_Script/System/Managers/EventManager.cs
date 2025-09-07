@@ -14,5 +14,6 @@ public class EventManager : MonoBehaviour
     public static event Action onPlayerDied; //Example signal
     
     // WORLD //
-
+    public static void EncounterObjective(IEncounterObjective objective) => onEncounterObjective?.Invoke(objective);
+    public static event Action<IEncounterObjective> onEncounterObjective;
 }
