@@ -1,13 +1,11 @@
-using TMPro;
-using UnityEngine;
 public class Health : Resource
 {
     //basically a stub
-    [SerializeField] TextMeshProUGUI healthUI;
+    //static health doesn't need to do anything more than this
 
     protected override void SetValue(float num)
     {
         base.SetValue(num);
-        healthUI.text = ((int)num).ToString();
     }
+
 }
