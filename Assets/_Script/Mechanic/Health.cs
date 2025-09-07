@@ -1,21 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-
-public class Health : MonoBehaviour, IResource
+public class Health : Resource
 {
-    public float Resource { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public float ResourceMax { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    //basically a stub
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] TextMeshProUGUI healthUI;
 
-    // Update is called once per frame
-    void Update()
+    protected override void SetValue(float num)
     {
-        
+        base.SetValue(num);
+        healthUI.text = ((int)num).ToString();
     }
 }
