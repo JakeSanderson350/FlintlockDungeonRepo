@@ -17,6 +17,15 @@ public class Resource : MonoBehaviour, IResource
     private float max;
     private float min;
 
+    [SerializeField] ResourceStats stats;
+
+    private void Awake()
+    {
+        value = stats.startValue;
+        max = stats.max;
+        min = stats.min;
+    }
+
     protected virtual void SetValue(float num)
     {
         if(num == value) 
@@ -29,7 +38,7 @@ public class Resource : MonoBehaviour, IResource
             onChanged?.Invoke();
             onIncreased?.Invoke();
 
-            if (value > max)
+            if (value >= max)
             {
                 value = max;
                 onFull?.Invoke();
@@ -45,7 +54,7 @@ public class Resource : MonoBehaviour, IResource
             onChanged?.Invoke();
             onDecreased?.Invoke();
 
-            if(value > min)
+            if(value >= min)
             {
                 value = min;
                 onEmpty?.Invoke();
