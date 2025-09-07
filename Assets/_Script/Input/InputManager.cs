@@ -9,8 +9,7 @@ public class InputManager : MonoBehaviour
 
     public static Vector2 inputMove;
     public static Vector2 inputDeltaPointer;
-    public static Action inputJump;
-    public static Action inputCrouchDown, inputCrouchUp;
+    public static Action inputAttack, inputJump, inputCrouchDown, inputCrouchUp;
 
     public static Action inputMenu;
     public static Action inputStart;
@@ -24,6 +23,7 @@ public class InputManager : MonoBehaviour
 
         defaultControls.Move.performed += ctx => inputMove = ctx.ReadValue<Vector2>();
         defaultControls.Look.performed += ctx => inputDeltaPointer = ctx.ReadValue<Vector2>();
+        defaultControls.Attack.started += ctx => inputAttack?.Invoke();
         defaultControls.Jump.started += ctx => inputJump?.Invoke();
         defaultControls.Crouch.started += ctx => inputCrouchDown?.Invoke();
         defaultControls.Crouch.canceled += ctx => inputCrouchUp?.Invoke();
