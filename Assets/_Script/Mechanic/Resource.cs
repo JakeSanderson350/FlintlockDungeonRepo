@@ -4,12 +4,14 @@ using UnityEngine;
 public class Resource : MonoBehaviour, IResource
 {
     public float Value { get => value; set => SetValue(value); }
+    public float Percent { get => Mathf.InverseLerp(min, max, value); set => SetValue(Mathf.Lerp(min, max, value)); }
     public float Max { get => max; }
     public float Min { get => min; }
 
-    public event Action onChanged;
-    public event Action onIncreased;
-    public event Action onDecreased;
+                                                            /// <summary> (Value, Change, Percent) </summary>
+    public event Action<float, float, float> onChanged;     /// <summary> (Value, Change, Percent) </summary>
+    public event Action<float, float, float> onIncreased;   /// <summary> (Value, Change, Percent) </summary>
+    public event Action<float, float, float> onDecreased;
     public event Action onEmpty;
     public event Action onFull;
 
@@ -26,17 +28,20 @@ public class Resource : MonoBehaviour, IResource
         min = stats.min;
     }
 
+
     protected virtual void SetValue(float num)
     {
         if(num == value) 
             return;
-        
+
+        float dif = num - value;
+
         if(num > value)
         {
             value = num;
 
-            onChanged?.Invoke();
-            onIncreased?.Invoke();
+            onChanged?.Invoke(num, dif, Percent);
+            onIncreased?.Invoke(num, dif, Percent);
 
             if (value >= max)
             {
@@ -51,14 +56,16 @@ public class Resource : MonoBehaviour, IResource
         {
             value = num;
 
-            onChanged?.Invoke();
-            onDecreased?.Invoke();
+            onChanged?.Invoke(num, dif, Percent);
+            onDecreased?.Invoke(num, dif, Percent);
 
-            if(value >= min)
+            if(value <= min)
             {
                 value = min;
                 onEmpty?.Invoke();
             }
+
+            return;
         }
 
     }

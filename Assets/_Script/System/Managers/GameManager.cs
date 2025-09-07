@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         currentLevel = levelData.Find(x => x.sceneName == SceneManager.GetActiveScene().name);
-        if (currentLevel == null) Debug.LogError("No scene found in \"Resources/LevelData\" for current scene");
+        if (currentLevel == null) Debug.LogError("No scene data found in \"Resources/LevelData\" for current scene");
     }
 
     public void LoadScene(string name)
@@ -62,6 +62,13 @@ public class GameManager : MonoBehaviour
     {
         currentLevel.LoadNextLevel();
     }
-
+    public void LoadLastLevel()
+    {
+        currentLevel.LoadNextLevel();
+    }
+    public void ReloadLevel()
+    {
+        currentLevel.ReloadLevel();
+    }
 }
 
