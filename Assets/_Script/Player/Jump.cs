@@ -8,6 +8,9 @@ public class Jump : MonoBehaviour
     Forces forces;
 
     [SerializeField] PlayerStats profile;
+    [SerializeField] List<AudioClip> jumpSounds;
+    [SerializeField] List<AudioClip> wallJumpSounds;
+    [SerializeField] List<AudioClip> jumpLandingSounds;
 
     Vector3 horizontalVelocity = Vector3.zero;
     Vector3 verticalVelocity = Vector3.zero;
@@ -21,6 +24,7 @@ public class Jump : MonoBehaviour
     bool canWallJump; //probably redundant but may have future use
     float airTime;
     RaycastHit hit;
+
 
     public float GetAirTime() => airTime;
     public bool GetIsGrounded() => isGrounded;
@@ -74,6 +78,8 @@ public class Jump : MonoBehaviour
         StartCoroutine(JumpCooldown());
         isGrounded = false;
         forces.AddForce(profile.jumpForce);
+
+        AudioPlayer.PlaySFX(jumpSounds, transform);
     }
 
     private void WallJump()
@@ -89,6 +95,8 @@ public class Jump : MonoBehaviour
 
         forces.AddForce(wallJumpForce);
         horizontalVelocity = wallNormal * profile.wallJumpForce;
+
+        AudioPlayer.PlaySFX(wallJumpSounds, transform);
     }
 
     void AirbornTrigger()
@@ -100,6 +108,8 @@ public class Jump : MonoBehaviour
     {
         //LANDING STATE IN HERE
         airTime = 0;
+
+        AudioPlayer.PlaySFX(jumpLandingSounds, transform);
     }
 
     void AirbornUpdate()

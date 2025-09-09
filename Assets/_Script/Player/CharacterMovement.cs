@@ -10,15 +10,17 @@ public class CharacterMovement : MonoBehaviour
     Forces forces;
 
     [SerializeField] PlayerStats profile;
+    [SerializeField] List<AudioClip> footstepSounds;
 
     Vector2 moveInput = Vector2.zero;
     Vector3 horizontalVelocity = Vector3.zero;
     Vector3 verticalVelocity = Vector3.zero;
-    public bool isGrounded;
+    bool isGrounded;
     bool wasGrounded;
     bool isCrouching;
     bool isSliding;
     float airTime;
+    float footstepTimer = 0.0f; // Sry this is very jank - jake:(
 
     public float GetAirTime() => airTime;
     public bool GetIsGrounded() => isGrounded;
@@ -92,7 +94,7 @@ public class CharacterMovement : MonoBehaviour
     void GroundedUpdate()
     {
         //GROUNDED TICK STUFF HERE
-
+        HandleFootstep();
     }
 
     void CheckGrounded()
@@ -119,5 +121,25 @@ public class CharacterMovement : MonoBehaviour
             GroundedUpdate();
         else
             AirbornUpdate();
+    }
+
+    private void HandleFootstep()
+    {
+        if(isGrounded && !isSliding && moveInput != Vector2.zero)
+        {
+            footstepTimer += Time.deltaTime;
+
+            float interval = isCrouching ? 0.6f : 0.3f; //sry james sry james sry james sry james sry jame sry sry sry
+
+            if (footstepTimer >= interval)
+            {
+                AudioPlayer.PlaySFX(footstepSounds, transform);
+                footstepTimer = 0.0f;
+            }
+        }
+        else
+        {
+            footstepTimer = 0.0f;
+        }
     }
 }
