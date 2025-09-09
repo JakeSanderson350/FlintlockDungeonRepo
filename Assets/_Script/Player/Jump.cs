@@ -30,18 +30,8 @@ public class Jump : MonoBehaviour
         forces = GetComponent<Forces>();
     }
 
-    private void OnEnable()
-    {
-        InputManager.inputJump += JumpPressed;
-    }
-
-    private void OnDisable()
-    {
-        InputManager.inputJump -= JumpPressed;
-    }
-
     // Update is called once per frame
-    void Update()
+    public void UpdateJump()
     {
         CheckGrounded();
         CheckOnWall();
@@ -52,7 +42,7 @@ public class Jump : MonoBehaviour
         verticalVelocity = Vector3.zero;
     }
 
-    void JumpPressed()
+    public void JumpPressed()
     {
         if (!isWallJumpOnCooldown && canWallJump)
         {
