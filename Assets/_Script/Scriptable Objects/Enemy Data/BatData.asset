@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b694c1e81f16e642850f345f04eba62, type: 3}
   m_Name: BatData
   m_EditorClassIdentifier: 
+  moveSpeed: 7
