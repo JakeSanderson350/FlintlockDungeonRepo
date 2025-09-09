@@ -8,6 +8,9 @@ public class Jump : MonoBehaviour
     Forces forces;
 
     [SerializeField] PlayerStats profile;
+    [SerializeField] List<AudioClip> jumpSounds;
+    [SerializeField] List<AudioClip> wallJumpSounds;
+    [SerializeField] List<AudioClip> jumpLandingSounds;
 
     Vector3 horizontalVelocity = Vector3.zero;
     Vector3 verticalVelocity = Vector3.zero;
@@ -22,6 +25,7 @@ public class Jump : MonoBehaviour
     float airTime;
     RaycastHit hit;
 
+
     public float GetAirTime() => airTime;
     public bool GetIsGrounded() => isGrounded;
     // Start is called before the first frame update
@@ -30,18 +34,8 @@ public class Jump : MonoBehaviour
         forces = GetComponent<Forces>();
     }
 
-    private void OnEnable()
-    {
-        InputManager.inputJump += JumpPressed;
-    }
-
-    private void OnDisable()
-    {
-        InputManager.inputJump -= JumpPressed;
-    }
-
     // Update is called once per frame
-    void Update()
+    public void UpdateJump()
     {
         CheckGrounded();
         CheckOnWall();
@@ -52,7 +46,7 @@ public class Jump : MonoBehaviour
         verticalVelocity = Vector3.zero;
     }
 
-    void JumpPressed()
+    public void JumpPressed()
     {
         if (!isWallJumpOnCooldown && canWallJump)
         {
@@ -84,6 +78,8 @@ public class Jump : MonoBehaviour
         StartCoroutine(JumpCooldown());
         isGrounded = false;
         forces.AddForce(profile.jumpForce);
+
+        AudioPlayer.PlaySFX(jumpSounds, transform);
     }
 
     private void WallJump()
@@ -99,6 +95,8 @@ public class Jump : MonoBehaviour
 
         forces.AddForce(wallJumpForce);
         horizontalVelocity = wallNormal * profile.wallJumpForce;
+
+        AudioPlayer.PlaySFX(wallJumpSounds, transform);
     }
 
     void AirbornTrigger()
@@ -110,6 +108,8 @@ public class Jump : MonoBehaviour
     {
         //LANDING STATE IN HERE
         airTime = 0;
+
+        AudioPlayer.PlaySFX(jumpLandingSounds, transform);
     }
 
     void AirbornUpdate()

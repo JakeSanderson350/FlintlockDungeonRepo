@@ -307,7 +307,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: 39c016c0cb7134643961f255e91d13c6, type: 2}
-  isGrounded: 0
+  footstepSounds:
+  - {fileID: 8300000, guid: e6c16fb9fd5ec054bb0d787689140dc2, type: 3}
+  - {fileID: 8300000, guid: 880c156955c03964fad05aa1dbb04ddc, type: 3}
+  - {fileID: 8300000, guid: 0cded885937e98c4fab60d1d409ebbc8, type: 3}
+  - {fileID: 8300000, guid: 962b9bb11607357489a13b7eae0cf887, type: 3}
+  - {fileID: 8300000, guid: 0ca51e11a4b1853418ba47a8d8cdb3fe, type: 3}
 --- !u!114 &734703997417005108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,6 +326,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: 39c016c0cb7134643961f255e91d13c6, type: 2}
+  jumpSounds:
+  - {fileID: 8300000, guid: 21de8b58f8dae14439572a76dc9bdde0, type: 3}
+  - {fileID: 8300000, guid: 57087136f94276e4284c841adc3b74a4, type: 3}
+  - {fileID: 8300000, guid: 49dca1427f0d30e44b9ba74afd58b147, type: 3}
+  - {fileID: 8300000, guid: cc04c47b2d04aea4e9de2fb043c952e4, type: 3}
+  wallJumpSounds:
+  - {fileID: 8300000, guid: 21de8b58f8dae14439572a76dc9bdde0, type: 3}
+  - {fileID: 8300000, guid: 57087136f94276e4284c841adc3b74a4, type: 3}
+  - {fileID: 8300000, guid: 49dca1427f0d30e44b9ba74afd58b147, type: 3}
+  - {fileID: 8300000, guid: cc04c47b2d04aea4e9de2fb043c952e4, type: 3}
+  jumpLandingSounds:
+  - {fileID: 8300000, guid: aaab400165388bd4ba2a5210c3d0b105, type: 3}
+  - {fileID: 8300000, guid: 42832e9f6342dc348a8443b4456f1e20, type: 3}
+  - {fileID: 8300000, guid: 7f0d4fc3c3cfbce47928da403be2a159, type: 3}
+  - {fileID: 8300000, guid: 6bb066efa6423174e9935cd52da4ce70, type: 3}
+  - {fileID: 8300000, guid: 609f328dc8d02af44bb73632b956f8d1, type: 3}
+  - {fileID: 8300000, guid: e9663605a0d8a0f458b0d62b281e9d4e, type: 3}
 --- !u!114 &902827987118364954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,7 +431,7 @@ PrefabInstance:
     - target: {fileID: 5122015697497030932, guid: 598cb88f308f4364f93ba4cda7c020bc,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 1416
+      value: 1422
       objectReference: {fileID: 0}
     - target: {fileID: 7305945620016084462, guid: 598cb88f308f4364f93ba4cda7c020bc,
         type: 3}
