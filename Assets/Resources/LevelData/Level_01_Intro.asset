@@ -15,6 +15,8 @@ MonoBehaviour:
   sceneName: Level_01_Intro
   name: 
   description: 
-  nextLevel: {fileID: 11400000, guid: 2b20ee5de86b08444848de646fbf7ead, type: 2}
+  nextLevel: {fileID: 11400000, guid: 8c640271ac7a7a1428d7f4ab3abcb5f7, type: 2}
+  lastLevel: {fileID: 11400000, guid: 6b9e5a5f19377564997e2c342566df98, type: 2}
+  reloadLevel: {fileID: 11400000}
   playOnSceneLoad: 0
   soundtrack: {fileID: 0}

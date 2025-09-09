@@ -17,6 +17,8 @@ public class Slide : MonoBehaviour
     bool slideDurationOver;
     float startScale;
 
+    public void SetMoveInput(Vector2 _moveInput) => moveInput = _moveInput;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,25 +27,9 @@ public class Slide : MonoBehaviour
         startScale = transform.localScale.y;
     }
 
-    private void OnEnable()
-    {
-        InputManager.inputCrouchDown += CrouchPressed;
-        InputManager.inputCrouchUp += CrouchUp;
-        InputManager.inputJump += JumpPressed;
-    }
-
-    private void OnDisable()
-    {
-        InputManager.inputCrouchDown -= CrouchPressed;
-        InputManager.inputCrouchUp -= CrouchUp;
-        InputManager.inputJump -= JumpPressed;
-    }
-
     // Update is called once per frame
-    void Update()
+    public void UpdateSlide ()
     {
-        moveInput = InputManager.inputMove;
-
         if(slideDurationOver)
         {
             StopSlide();
@@ -62,7 +48,7 @@ public class Slide : MonoBehaviour
         }
     }
 
-    private void CrouchPressed()
+    public void CrouchPressed()
     {
         CrouchPlayerDown();
 
@@ -72,7 +58,7 @@ public class Slide : MonoBehaviour
         }
     }
 
-    private void CrouchUp()
+    public void CrouchUp()
     {
         CrouchPlayerUp();
 
@@ -82,7 +68,7 @@ public class Slide : MonoBehaviour
         }
     }
 
-    private void JumpPressed()
+    public void JumpPressed()
     {
         if (isSliding)
         {

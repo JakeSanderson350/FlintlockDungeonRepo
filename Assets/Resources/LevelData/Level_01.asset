@@ -16,5 +16,7 @@ MonoBehaviour:
   name: 
   description: 
   nextLevel: {fileID: 11400000, guid: 6b9e5a5f19377564997e2c342566df98, type: 2}
+  lastLevel: {fileID: 11400000, guid: 6b9e5a5f19377564997e2c342566df98, type: 2}
+  reloadLevel: {fileID: 11400000, guid: 2baa8f8dc3e627a4fb0743b6250a94ea, type: 2}
   playOnSceneLoad: 0
   soundtrack: {fileID: 0}

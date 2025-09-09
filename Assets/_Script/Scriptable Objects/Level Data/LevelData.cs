@@ -9,12 +9,16 @@ public class LevelData : ScriptableObject
     public new string name;
     [TextArea] public string description;
 
-    [Header("Victory Conditions")]
+    [Header("Level Links")]
     public LevelData nextLevel;
+    public LevelData lastLevel;
+    public LevelData reloadLevel;
 
     [Header("Audio")]
     public bool playOnSceneLoad;
     public AudioClip soundtrack;
 
     public void LoadNextLevel() => SceneManager.LoadScene(nextLevel.sceneName);
+    public void LoadLastLevel() => SceneManager.LoadScene(lastLevel.sceneName);
+    public void ReloadLevel() => SceneManager.LoadScene(reloadLevel.sceneName);
 }
