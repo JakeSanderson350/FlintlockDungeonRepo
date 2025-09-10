@@ -14,14 +14,14 @@ public class MusicManager : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += PlayOnAwake;
+        EventManager.onSceneLoaded += PlayOnAwake;
     }
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= PlayOnAwake;
+        EventManager.onSceneLoaded -= PlayOnAwake;
     }
 
-    void PlayOnAwake(Scene scene, LoadSceneMode mode)
+    void PlayOnAwake(LevelData levelData)
     {
         if (introTrack != null)
             KillTrack(introTrack);
@@ -29,7 +29,8 @@ public class MusicManager : MonoBehaviour
         if (activeTrack != null)
                 StopMusic();
 
-        //PlayMusic();
+        if(levelData.playOnSceneLoad)
+            PlayMusic(levelData.soundtrack);
     }
 
     public void PlayMusic(AudioClip music)

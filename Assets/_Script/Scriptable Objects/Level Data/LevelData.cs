@@ -14,7 +14,8 @@ public class LevelData : ScriptableObject
     public LevelData lastLevel;
     public LevelData reloadLevel;
 
-    [Header("Audio")]
+    [Header("Misc")]
+    public bool enableMouseOnLoad;
     public bool playOnSceneLoad;
     public AudioClip soundtrack;
 

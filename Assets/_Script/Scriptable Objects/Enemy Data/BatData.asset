@@ -15,4 +15,6 @@ MonoBehaviour:
   moveSpeed: 7
   isFlying: 1
   isClimber: 0
+  retreatDistance: 5
   attackRange: 1
+  damage: 50

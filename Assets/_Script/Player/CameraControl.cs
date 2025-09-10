@@ -7,7 +7,7 @@ public class CameraControl : MonoBehaviour
 {
     [SerializeField] Transform playerCamera;
     [SerializeField] Transform playerBody;
-    [SerializeField] PlayerPrefs prefs;
+    [SerializeField] PlayerPreferences prefs; //need to swap this over to default unity prefs
     [SerializeField] bool enableMouse = false;
 
     float xRotation;

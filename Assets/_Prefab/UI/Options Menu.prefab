@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8735376561085240544}
   - component: {fileID: 7589688052425600595}
   - component: {fileID: 5448826860650571758}
+  - component: {fileID: 2131178331184734822}
   m_Layer: 5
   m_Name: Options Menu
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6313726}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -80,6 +81,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.5
+--- !u!114 &2131178331184734822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3928044550562604581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315c3a3341e06e0469853d95c96700f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefs: {fileID: 11400000, guid: 486a27e6a9ae2b049ab82374d1451751, type: 2}
+  mouseSensitivity: {fileID: 5754445092271509597}
 --- !u!1001 &671417749520631764
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -671,7 +686,7 @@ PrefabInstance:
     - target: {fileID: 5353651326316100996, guid: faeb54068026a414ea834326188a0b57,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 109038881000950175, guid: 2df397d40d98a30449df924f9065e624,
         type: 3}
@@ -785,7 +800,7 @@ PrefabInstance:
     - target: {fileID: 4531476609791162309, guid: 13bd365893c263e4faeec7d6ce35d955,
         type: 3}
       propertyPath: m_Name
-      value: Slider Option (2)
+      value: Slider Sensitivity
       objectReference: {fileID: 0}
     - target: {fileID: 5141666250893811827, guid: 13bd365893c263e4faeec7d6ce35d955,
         type: 3}
@@ -889,6 +904,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6763579835427492327, guid: 13bd365893c263e4faeec7d6ce35d955,
         type: 3}
+      propertyPath: m_text
+      value: Mouse Sensitvity
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763579835427492327, guid: 13bd365893c263e4faeec7d6ce35d955,
+        type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
@@ -954,6 +974,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5332773146022416671}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5754445092271509597 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 421708608363675970, guid: 13bd365893c263e4faeec7d6ce35d955,
+    type: 3}
+  m_PrefabInstance: {fileID: 5332773146022416671}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6483111226670056804
 PrefabInstance:
   m_ObjectHideFlags: 0

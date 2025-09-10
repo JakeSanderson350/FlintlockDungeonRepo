@@ -1,10 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TriggerEnter : MonoBehaviour
 {
     [SerializeField] string triggerTag = "Player";
     public Action onTriggerEntered;
+    
+    [SerializeField] UnityEvent onTrigger;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,6 +15,7 @@ public class TriggerEnter : MonoBehaviour
         {
             enabled = false;
             onTriggerEntered?.Invoke();
+            onTrigger?.Invoke();
         }
     }
 }

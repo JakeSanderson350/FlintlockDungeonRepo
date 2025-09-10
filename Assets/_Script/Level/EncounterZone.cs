@@ -10,7 +10,7 @@ public class EncounterZone : MonoBehaviour
     [SerializeField] Transform blockerContainer;
 
     [SerializeField] List<Spawner> spawners;
-    List<IEncounterObjective> waveObjectives;
+    List<IEncounterObjective> waveObjectives = new();
     //List<GameObject> blockers;
     TriggerEnter trigger;
 
@@ -44,6 +44,7 @@ public class EncounterZone : MonoBehaviour
     void StartEncounter()
     {
         blockerContainer.gameObject.SetActive(true);
+        trigger.gameObject.SetActive(false);
         SpawnWave(waveIndex, enemyContainer);
     }
 

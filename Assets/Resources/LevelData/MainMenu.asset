@@ -18,5 +18,6 @@ MonoBehaviour:
   nextLevel: {fileID: 11400000, guid: 2baa8f8dc3e627a4fb0743b6250a94ea, type: 2}
   lastLevel: {fileID: 11400000}
   reloadLevel: {fileID: 11400000}
-  playOnSceneLoad: 0
-  soundtrack: {fileID: 0}
+  enableMouseOnLoad: 1
+  playOnSceneLoad: 1
+  soundtrack: {fileID: 8300000, guid: 75e54ae90812d1e4887d4fab4d978611, type: 3}

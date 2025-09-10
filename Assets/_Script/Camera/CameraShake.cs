@@ -29,11 +29,26 @@ public class CameraShake : MonoBehaviour
         cam = GetComponent<Camera>();
     }
 
+    private void OnEnable()
+    {
+        EventManager.onSetCameraTrauma += SetTrauma;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.onSetCameraTrauma -= SetTrauma;
+    }
+
     void Update()
     {
         ShakeCam();
     }
     
+    private void SetTrauma(float trauma)
+    {
+        this.trauma = trauma > this.trauma ? trauma : this.trauma;
+    }
+
     private void ShakeCam()
     {
         if (trauma > 0)

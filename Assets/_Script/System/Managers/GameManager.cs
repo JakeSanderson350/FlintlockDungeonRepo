@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         currentLevel = levelData.Find(x => x.sceneName == SceneManager.GetActiveScene().name);
         if (currentLevel == null) Debug.LogError("No scene data found in \"Resources/LevelData\" for current scene");
+        EventManager.SceneLoaded(currentLevel);
+
+        Cursor.visible = currentLevel.enableMouseOnLoad;
+        Cursor.lockState = currentLevel.enableMouseOnLoad ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
     public void LoadScene(string name)

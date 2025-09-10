@@ -6,12 +6,16 @@ public class ObjectiveManager : MonoBehaviour
 {
     public static List<Objective> objectives = new();
 
-    private void Awake()
+    private void OnEnable()
     {
-        SceneManager.sceneLoaded += ScrubObjectiveList;
+        EventManager.onSceneLoaded += ScrubObjectiveList;
+    }
+    private void OnDisable()
+    {
+        EventManager.onSceneLoaded -= ScrubObjectiveList;
     }
 
-    void ScrubObjectiveList(Scene scene, LoadSceneMode mode)
+    void ScrubObjectiveList(LevelData data)
     {
         //scrub out null objectives from unloaded scenes, not needed if objectives are implimented correctly 
         objectives.RemoveAll(x => x == null);

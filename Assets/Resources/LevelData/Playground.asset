@@ -15,6 +15,9 @@ MonoBehaviour:
   sceneName: Playground
   name: 
   description: 
-  nextLevel: {fileID: 0}
-  playOnSceneLoad: 0
-  soundtrack: {fileID: 0}
+  nextLevel: {fileID: 11400000, guid: 6b9e5a5f19377564997e2c342566df98, type: 2}
+  lastLevel: {fileID: 11400000, guid: 6b9e5a5f19377564997e2c342566df98, type: 2}
+  reloadLevel: {fileID: 11400000}
+  enableMouseOnLoad: 0
+  playOnSceneLoad: 1
+  soundtrack: {fileID: 8300000, guid: 60f8834e6f131634aa6d289c4222865e, type: 3}

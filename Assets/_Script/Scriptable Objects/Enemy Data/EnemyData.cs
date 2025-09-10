@@ -11,6 +11,7 @@ public class EnemyData : ScriptableObject
     public float moveSpeed;
     public bool isFlying;
     public bool isClimber;
+    public float retreatDistance;
 
     [Header("Attacks")]
     public float attackRange;

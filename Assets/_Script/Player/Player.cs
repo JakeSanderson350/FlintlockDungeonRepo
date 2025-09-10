@@ -21,14 +21,24 @@ public class Player : MonoBehaviour
         health = GetComponent<Health>();
         hud = GetComponentInChildren<Hud>();
 
-        InputManager.inputJump += JumpKeyDown;
-        InputManager.inputCrouchDown += CrouchKeyDown;
-        InputManager.inputCrouchUp += CrouchKeyUp;
-
         health.onChanged += hud.SetHealthBar;
         health.onEmpty += Death;
 
         deathTimer.OnTimerStop += Restart;
+    }
+
+    private void OnEnable()
+    {
+        InputManager.inputJump += JumpKeyDown;
+        InputManager.inputCrouchDown += CrouchKeyDown;
+        InputManager.inputCrouchUp += CrouchKeyUp;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.inputJump -= JumpKeyDown;
+        InputManager.inputCrouchDown -= CrouchKeyDown;
+        InputManager.inputCrouchUp -= CrouchKeyUp;
     }
 
     private void Update()
