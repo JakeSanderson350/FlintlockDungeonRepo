@@ -78,6 +78,4 @@ public class Player : MonoBehaviour
     {
         GameManager.inst.ReloadLevel();
     }
-
-    
 }
