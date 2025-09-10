@@ -6,6 +6,13 @@ using UnityEngine;
 
 public class EnemyData : ScriptableObject
 {
+
+    [Header("Movement")]
     public float moveSpeed;
+    public bool isFlying;
+    public bool isClimber;
+
+    [Header("Attacks")]
+    public float attackRange;
 
 }

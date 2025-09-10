@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: BatData
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  isFlying: 1
+  isClimber: 0
+  attackRange: 1

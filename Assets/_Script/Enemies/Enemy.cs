@@ -27,12 +27,27 @@ public class Enemy : MonoBehaviour //, IVisitable
     {
         
     }
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         GetComponent<NavMeshAgent>().speed = enemyData.moveSpeed;
         GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
+        GetComponents<SphereCollider>()[0].radius = enemyData.attackRange;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Attack();
+        }
+    }
+    
+    private void Attack()
+    {
+        Debug.Log("Bat is attacking!");
+        player.GetComponent<Player>().TakeDamage(1);
     }
 
     
