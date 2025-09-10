@@ -78,9 +78,4 @@ public class Player : MonoBehaviour
     {
         GameManager.inst.ReloadLevel();
     }
-
-    public void TakeDamage(float damage)
-    {
-        health.Value -= damage;
-    }
 }

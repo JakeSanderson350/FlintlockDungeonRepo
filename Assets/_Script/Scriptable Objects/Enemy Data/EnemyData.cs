@@ -14,5 +14,6 @@ public class EnemyData : ScriptableObject
 
     [Header("Attacks")]
     public float attackRange;
+    public float damage;
 
 }

@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour //, IVisitable
 
     GameObject player;
 
+    Health health;
+
     //public void Accept(IVisitor visitor)
     //{
         
@@ -34,6 +36,7 @@ public class Enemy : MonoBehaviour //, IVisitable
         GetComponent<NavMeshAgent>().speed = enemyData.moveSpeed;
         GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
         GetComponents<SphereCollider>()[0].radius = enemyData.attackRange;
+        health = GetComponent<Health>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,14 +44,19 @@ public class Enemy : MonoBehaviour //, IVisitable
         if (other.gameObject.CompareTag("Player"))
         {
             Attack();
+            
         }
     }
     
     private void Attack()
     {
         Debug.Log("Bat is attacking!");
-        player.GetComponent<Player>().TakeDamage(1);
+        player.TryGetComponent(out Health hp);
+        hp.Value -= enemyData.damage;
     }
 
-    
+    private void Die()
+    {
+        
+    }
 }
